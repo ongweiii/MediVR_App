@@ -11,7 +11,6 @@ export default function Conversation() {
         setChat(data);
         setLoaded(true);
       });
-    console.log(id);
   }, []);
   return (
     <div className="container">
@@ -25,7 +24,7 @@ export default function Conversation() {
               } align-items-center`}
             >
               <div
-                className={`w-50 text-${
+                className={`w-75 text-${
                   item.event === "bot" ? "left" : "right"
                 }`}
               >
