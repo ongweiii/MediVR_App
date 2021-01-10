@@ -15,33 +15,44 @@ export default function Conversation() {
   return (
     <div className="container">
       <h1 className="text-center p-4">MediVR Core</h1>
-      <ul className="list-group p-4">
-        {loaded ? (
-          chat.map((item, index) => (
-            <li
-              className={`list-group-item d-flex flex-row justify-content-${
-                item.event === "bot" ? "start" : "end"
-              } align-items-center`}
+      <h5>Conversation for {id}</h5>
+      {loaded ? (
+        chat.map((item, index) => (
+          <div
+            className={`d-flex flex-row justify-content-${
+              item.event === "bot" ? "start" : "end"
+            } align-items-center`}
+          >
+            <div
+              style={{
+                maxWidth: "75%"
+              }}
+              className={`text-${item.event === "bot" ? "left" : "right"}`}
             >
               <div
-                className={`w-75 text-${
-                  item.event === "bot" ? "left" : "right"
-                }`}
+                className="bg-light p-2"
+                style={{
+                  borderTopLeftRadius: 12,
+                  borderTopRightRadius: 12,
+                  borderBottomLeftRadius: item.event === "bot" ? 0 : 12,
+                  borderBottomRightRadius: item.event === "bot" ? 12 : 0
+                }}
               >
                 <span className="h6">{item.event}</span>
                 <br />
                 <span className="text-end">{item.text}</span>
                 <br />
-                <small className="text-muted">
-                  {new Date(item.timestamp * 1000).toLocaleString()}
-                </small>
               </div>
-            </li>
-          ))
-        ) : (
-          <h6>Loading...</h6>
-        )}
-      </ul>
+
+              <small className="text-muted">
+                {new Date(item.timestamp * 1000).toLocaleString()}
+              </small>
+            </div>
+          </div>
+        ))
+      ) : (
+        <h6>Loading...</h6>
+      )}
     </div>
   );
 }
