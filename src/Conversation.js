@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import { getConversation } from "./Api";
 
 export default function Conversation() {
   let { id } = useParams();
   const [chat, setChat] = useState([]);
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
-    fetch("https://medi-vr-api.vercel.app/api/conversation/" + id)
-      .then((res) => res.json())
-      .then((data) => {
-        setChat(data);
-        setLoaded(true);
-      });
+    getConversation(id).then((data) => {
+      setChat(data);
+      setLoaded(true);
+    });
   }, []);
   return (
     <div className="container">
@@ -27,7 +26,7 @@ export default function Conversation() {
                 {moment(item.timestamp * 1000).format("Do MMM YYYY, h:mma")}
               </span>
             </div>
-            <div className="px-4 py-2">
+            <div className="p-2">
               {item.data.map((item2, index2) => (
                 <div
                   key={index2}

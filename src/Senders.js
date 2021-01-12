@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-
+import { getSenders } from "./Api";
 export default function Senders() {
   const [list, setList] = useState([]);
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
-    fetch("https://medi-vr-api.vercel.app/api/senders")
-      .then((res) => res.json())
-      .then((data) => {
-        setList(data);
-        setLoaded(true);
-      });
+    getSenders().then((data) => {
+      setList(data);
+      setLoaded(true);
+    });
   }, []);
   return (
     <div className="container">
@@ -34,11 +32,11 @@ export default function Senders() {
                   Conversation
                 </button>
               </Link>
-              {/* <Link to={`/checklist/${item.sender_id}`}> */}
-              <button className="btn btn-light text-success" disabled>
-                Checklist
-              </button>
-              {/* </Link> */}
+              <Link to={`/checklist/${item.sender_id}`}>
+                <button className="btn btn-light text-success">
+                  Checklist
+                </button>
+              </Link>
             </div>
           </div>
         ))

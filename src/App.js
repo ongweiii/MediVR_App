@@ -4,6 +4,7 @@ import "./styles.css";
 
 import Senders from "./Senders";
 import Conversation from "./Conversation";
+import Checklist from "./Checklist";
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={Senders} />
         <Route path="/conversation/:id" component={Conversation} />
+        <Route path="/checklist/:id" component={Checklist} />
       </Switch>
     </Router>
   );
