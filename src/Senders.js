@@ -18,7 +18,7 @@ export default function Senders() {
         list.map((item, index) => (
           <div
             key={index}
-            className="row bg-light p-2 m-2 rounded align-items-center"
+            className="row bg-light py-2 m-2 rounded border align-items-center"
           >
             <div className="col">
               <h5 className="text-truncate">{item.sender_id}</h5>

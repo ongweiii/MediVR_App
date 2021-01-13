@@ -11,3 +11,7 @@ export async function getSenders() {
 export async function getChecklist(id) {
   return fetch(API_URL + "/api/checklist/" + id).then((res) => res.json());
 }
+
+export async function getChecklistTemplate() {
+  return fetch(API_URL + "/api/checklisttemplate").then((res) => res.json());
+}
