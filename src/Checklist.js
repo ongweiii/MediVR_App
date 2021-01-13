@@ -8,6 +8,8 @@ export default function Checklist() {
   const [checklist, setChecklist] = useState([]);
   const [checklistTemplate, setChecklistTemplate] = useState({});
   const [loaded, setLoaded] = useState(false);
+  const [visibility, setVisibility] = useState([]);
+
   useEffect(() => {
     getChecklistTemplate().then((data) => {
       setChecklistTemplate(data);
@@ -15,25 +17,39 @@ export default function Checklist() {
     getChecklist(id).then((data) => {
       setChecklist(data);
       setLoaded(true);
+      setVisibility(new Array(data.length).fill(false));
     });
   }, []);
 
-  const renderSection = (section) => {
+  const toggle = (index) => {
+    let newVisibility = [...visibility];
+    newVisibility[index] = !newVisibility[index];
+    setVisibility(newVisibility);
+  };
+
+  const renderSection = (section, list) => {
     return (
       <div className="mb-3">
-        <h6>{section}</h6>
+        <h6>Section {section}</h6>
         {checklistTemplate[section].map((check) => (
           <div className="d-flex flex-row">
             <input
               className="m-2"
               type="checkbox"
-              checked={check.isCompulsory}
+              checked={checkActionInSession(list, check["intent"])}
             />
-            <span>{check.description}</span>
+            <span className={check.isCompulsory ? "font-weight-bold" : ""}>
+              {check.description}
+            </span>
           </div>
         ))}
       </div>
     );
+  };
+
+  const checkActionInSession = (list, actionName) => {
+    console.log(list);
+    return list.some((el) => el["action"] === actionName);
   };
 
   return (
@@ -42,18 +58,22 @@ export default function Checklist() {
       <h5>Checklist for {id}</h5>
       {loaded ? (
         checklist.map((item, index) => (
-          <div key={index}>
-            <div className="text-center">
-              <span className="badge px-2 text-white rounded-pill bg-secondary">
-                Session #{index + 1}:{" "}
+          <div key={index} className="my-2 bg-light p-2 rounded border">
+            <div
+              className="btn btn-block text-left"
+              onClick={() => toggle(index)}
+            >
+              <h6>Session #{index + 1}</h6>
+              <small className="text-muted">
                 {moment(item.timestamp * 1000).format("Do MMM YYYY, h:mma")}
-              </span>
+              </small>
             </div>
-            <div className="p-2">
-              {renderSection("1.Demo")}
-              {renderSection("2. PS")}
-              {renderSection("4. DTH")}
-              {/* {item.data.map((item2, index2) => (
+            {visibility[index] ? (
+              <div className="p-2">
+                {renderSection("1.Demo", item.data)}
+                {renderSection("2. PS", item.data)}
+                {renderSection("4. DTH", item.data)}
+                {/* {item.data.map((item2, index2) => (
                 <div
                   key={index2}
                   className={`d-flex flex-row justify-content-between align-items-center`}
@@ -64,7 +84,8 @@ export default function Checklist() {
                   </small>
                 </div>
               ))} */}
-            </div>
+              </div>
+            ) : null}
           </div>
         ))
       ) : (
