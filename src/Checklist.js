@@ -63,7 +63,7 @@ export default function Checklist() {
               className="btn btn-block text-left"
               onClick={() => toggle(index)}
             >
-              <h6>Session #{index + 1}</h6>
+              <h6>Session #{checklist.length - index}</h6>
               <small className="text-muted">
                 {moment(item.timestamp * 1000).format("Do MMM YYYY, h:mma")}
               </small>
