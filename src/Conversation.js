@@ -29,12 +29,6 @@ export default function Conversation() {
       {loaded ? (
         chat.map((item, index) => (
           <div key={index} className="my-2 bg-light p-2 rounded border">
-            {/* <div className="text-center">
-              <span className="badge px-2 text-white rounded-pill bg-secondary">
-                Session #{index + 1}:{" "}
-                {moment(item.timestamp * 1000).format("Do MMM YYYY, h:mma")}
-              </span>
-            </div> */}
             <div
               className="btn btn-block text-left"
               onClick={() => toggle(index)}

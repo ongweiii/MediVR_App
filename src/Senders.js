@@ -16,29 +16,20 @@ export default function Senders() {
       <h1 className="text-center p-4">MediVR Core</h1>
       {loaded ? (
         list.map((item, index) => (
-          <div
-            key={index}
-            className="row bg-light py-2 m-2 rounded border align-items-center"
+          <Link
+            className="text-decoration-none"
+            to={`/sessions/${item.sender_id}`}
           >
-            <div className="col">
+            <div
+              key={index}
+              className="btn btn-light btn-block border text-left"
+            >
               <h5 className="text-truncate">{item.sender_id}</h5>
               <small className="text-muted">
                 {moment(item.last * 1000).format("Do MMM YYYY, h:mma")}
               </small>
             </div>
-            <div className="col-md-auto text-center">
-              <Link to={`/conversation/${item.sender_id}`}>
-                <button className="btn btn-light text-primary mr-2">
-                  Conversation
-                </button>
-              </Link>
-              <Link to={`/checklist/${item.sender_id}`}>
-                <button className="btn btn-light text-success">
-                  Checklist
-                </button>
-              </Link>
-            </div>
-          </div>
+          </Link>
         ))
       ) : (
         <h6>Loading...</h6>

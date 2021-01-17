@@ -73,17 +73,6 @@ export default function Checklist() {
                 {renderSection("1.Demo", item.data)}
                 {renderSection("2. PS", item.data)}
                 {renderSection("4. DTH", item.data)}
-                {/* {item.data.map((item2, index2) => (
-                <div
-                  key={index2}
-                  className={`d-flex flex-row justify-content-between align-items-center`}
-                >
-                  <strong>{item2.action}</strong>
-                  <small className="text-muted">
-                    {moment(item2.timestamp * 1000).format("h:mma")}
-                  </small>
-                </div>
-              ))} */}
               </div>
             ) : null}
           </div>
