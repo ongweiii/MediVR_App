@@ -55,7 +55,7 @@ export default function SessionDetail() {
   };
 
   const ConfirmDelete = () => {
-    var resp = confirm("Are you sure you want to delete this session?");
+    var resp = window.confirm("Are you sure you want to delete this session?");
     if (resp) {
       deleteSession(id, ts).then(() => {
         alert("Successfully deleted!");

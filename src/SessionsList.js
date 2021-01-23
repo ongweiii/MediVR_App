@@ -17,7 +17,7 @@ export default function SessionsList() {
   }, []);
 
   const ConfirmDelete = () => {
-    var resp = confirm("Are you sure you want to delete this sender?");
+    var resp = window.confirm("Are you sure you want to delete this sender?");
     if (resp) {
       deleteSender(id).then(() => {
         alert("Successfully deleted!");
