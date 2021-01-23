@@ -25,3 +25,15 @@ export async function getSessions(sender_id) {
     res.json()
   );
 }
+
+export async function deleteSession(sender_id, timestamp) {
+  return fetch(API_URL + `/api/sessions/${sender_id}/${timestamp}`, {
+    method: "DELETE"
+  });
+}
+
+export async function deleteSender(sender_id) {
+  return fetch(API_URL + `/api/senders/${sender_id}`, {
+    method: "DELETE"
+  });
+}
